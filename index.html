@@ -3,9 +3,61 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title></title>
+    <title>landkollen</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
+
   </head>
+
   <body>
+    <header class="header">
+      <div class="logo">  <img src="public/logo.png" alt="Logga"> landkollen </div>
+      <div class="intro">
+        <h1>Upptäck länder i världen</h1>
+        <p>
+          Välj ett land för att se informatiom om landet, aktuellt väder och plats på karta.
+        </p>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="search-section">
+        <label for="countrySelect">Välj land</label>
+        <select id="countrySelect">
+          <option value="">Välj ett land</option>
+        </select>
+      </section>
+
+      <section id="content" class="content-hidden">
+        <div class="top-grid">
+          <article class="country-box">
+            <div class="country-header">
+              <h2 id="countryName">Land</h2>
+              <img id="flag" src="" alt="">
+            </div>
+          </article>
+
+          <article class="weather-box">
+            <h3>Väder</h3>
+            <div id="weatherInfo"></div>
+          </article>
+        </div>
+
+        <div class="bottom-grid">
+          <article class="map-box">
+            <h3>Karta</h3>
+            <div id="map"></div>
+          </article>
+        </div>
+      </section>
+    </main>
+    
     <script type="module" src="/src/js/main.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
+
   </body>
 </html>
