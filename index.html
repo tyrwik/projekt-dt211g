@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>landkollen</title>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Aleo:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
      crossorigin=""/>
@@ -13,7 +17,7 @@
 
   <body>
     <header class="header">
-      <div class="logo">  <img src="public/logo.png" alt="Logga"> landkollen </div>
+      <div class="logo">  <img src="/logo.png" alt="Logga"> landkollen </div>
       <div class="intro">
         <h1>Upptäck länder i världen</h1>
         <p>
@@ -32,28 +36,34 @@
 
       <section id="content" class="content-hidden">
         <div class="top-grid">
-          <article class="country-box">
+          <article class="box country-box">
             <div class="country-header">
               <h2 id="countryName">Land</h2>
               <img id="flag" src="" alt="">
             </div>
           </article>
 
-          <article class="weather-box">
+          <article class="box weather-box">
             <h3>Väder</h3>
             <div id="weatherInfo"></div>
           </article>
         </div>
 
         <div class="bottom-grid">
-          <article class="map-box">
+          <article class="box info-box">
+            <h3>Information om landet</h3>
+            <div id="countryInfo"></div>
+          </article>
+        </div>
+
+          <article class="box map-box">
             <h3>Karta</h3>
             <div id="map"></div>
           </article>
-        </div>
+        
       </section>
     </main>
-    
+
     <script type="module" src="/src/js/main.js"></script>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
