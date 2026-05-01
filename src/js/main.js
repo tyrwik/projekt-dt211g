@@ -110,7 +110,59 @@ function renderWeather(weatherData) {
     const current = weatherData.current;
 
     weatherInfo.innerHTML = ` <p><strong>Temperatur:</strong> ${current.temperature_2m} °C </p>
-    <p><strong>Vind:</strong> ${current.wind_speed_10km} km/h</p>
+    <p><strong>Vind:</strong> ${current.wind_speed_10m} km/h</p>
     <p><strong>Väder:</strong> ${getWeatherText(current.weather_code)} </p>`;
 }
+
+/**
+ * Skriver ut information om landet på sidan.
+ * Funktionen uppdaterar HTML-elementen med information om landet.
+ * @param {Object} country landobjekt
+ * @param {Objekt}country.name objekt som inehåller landets namn.
+ * @param {Array<string>} country.capital array med huvudstäder
+ */
+
+function renderCountry(country) {
+    countryName.textContent = country.name.common;
+    flag.src = country.flags.png;
+    flag.alt = `Flagga för ${country.name.common}`;
+
+    const capital = country.capital ? country.capital[0] : "Ingen information";
+    const languages = country.languages
+    ? Object.values(country.languages).join(", ")
+    : "Ingen information";
+
+    countryInfo.innerHTML = `<p></strong>Huvudstad:</strong> ${capital}</p>
+    <p></strong>Region:</strong> ${country.region}</p>
+    <p></strong>Befolkning:</strong> ${country.population.toLocaleString("sv-SE")}</p>
+    <p></strong>Språk:</strong> ${languages}</p>`
+}
+
+
+async function countryChange() {
+    const selectedCountry = countrySelect.value;
+
+    if (!selectedCountry) {
+        return;
+    }
+
+    try {
+        const country = await fetchCountryByName(selectedCountry);
+        renderCountry(country);
+
+        const lat = country.latlng[0]
+        const lon = country.latlng[1]
+
+        const weatherData = await fetchWeather(lat, lon);
+        renderWeather(weatherData);
+
+        content.classList.remove("content-hidden")
+    } catch(error) {
+        console.error(error);
+        weatherInfo.innerHTML = "<p>Kunde inte hämta väder. </p>"
+    }
+}
+
+init();
+countrySelect.addEventListener("change", countryChange);
 

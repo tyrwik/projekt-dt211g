@@ -1,10 +1,7 @@
 @use "layout";
 @use "variables" as *;
 
-img {
-    max-width: 2em;
-    display: block;
-}
+
 
 .header {
     margin: 2rem auto;
@@ -17,6 +14,11 @@ img {
 .logo {
     font-size: 2em;
     font-weight: 700;
+
+    img {
+    max-width: 2em;
+    display: block;
+    }
 }
 
 .intro h1 {
@@ -43,5 +45,10 @@ img {
     }
 }
 
+#flag {
+    width: 9em;
+    height: auto;
+    border-radius: 5px;
+}
 
 
