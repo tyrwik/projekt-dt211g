@@ -17,7 +17,7 @@ let marker;
  */
 
 async function fetchCountries() {
-    const response = await fetch (`https://restcountries.com/v3.1/all?fields=name,capital,flags,population,region,languages,latlng`)
+    const response = await fetch ("https://restcountries.com/v3.1/all?fields=name,capital,flags,population,region,languages,latlng")
 
     if(!response.ok) {
        throw new Error("Kunde inte hämta länder.");
@@ -58,20 +58,6 @@ async function fetchCountryByName(countryNameValue) {
     const data = await response.json();
     return data [0];
 }
-
-/**
- * Startar funktionen
- */
-async function init() {
-    try {
-        const countries = await fetchCountries();
-        fillDropdown(countries);
-    }catch (error) {
-        console.error(error);
-    }
-}
-
-init();
 
 /**
  * Hämtar väder från Open-Meteo baserat på latitud och longitud.
@@ -132,34 +118,65 @@ function renderCountry(country) {
     ? Object.values(country.languages).join(", ")
     : "Ingen information";
 
-    countryInfo.innerHTML = `<p></strong>Huvudstad:</strong> ${capital}</p>
-    <p></strong>Region:</strong> ${country.region}</p>
-    <p></strong>Befolkning:</strong> ${country.population.toLocaleString("sv-SE")}</p>
-    <p></strong>Språk:</strong> ${languages}</p>`
+    countryInfo.innerHTML = `<p><strong>Huvudstad:</strong> ${capital}</p>
+    <p><strong>Region:</strong> ${country.region}</p>
+    <p><strong>Befolkning:</strong> ${country.population.toLocaleString("sv-SE")}</p>
+    <p><strong>Språk:</strong> ${languages}</p>`
 }
 
+function renderMap(lat, lon, country) {
+    if (!map) {
+        map = L.map("map").setView([lat, lon], 5);
+        
+        L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+            attribution: "&copy; OpenStreetMap contributors",
+        }).addTo(map);
+    }else {
+        map.setView([lat, lon], 5);
+    }
+    if (marker) {
+        marker.remove();
+    }
+
+    marker = L.marker([lat, lon]).addTo(map);
+    marker.bindPopup(country.name.common).openPopup();
+}
 
 async function countryChange() {
     const selectedCountry = countrySelect.value;
 
-    if (!selectedCountry) {
-        return;
-    }
+    if (!selectedCountry) return;
 
     try {
+        //Hämtar land
         const country = await fetchCountryByName(selectedCountry);
         renderCountry(country);
 
-        const lat = country.latlng[0]
-        const lon = country.latlng[1]
+        //Hämtar koordinater
+        const lat = country.latlng[0];
+        const lon = country.latlng[1];
 
+        //Hämtar väder
         const weatherData = await fetchWeather(lat, lon);
         renderWeather(weatherData);
 
+        //Visar karta
+        renderMap(lat, lon, country);
+
+        //Visar innehållet
         content.classList.remove("content-hidden")
     } catch(error) {
         console.error(error);
         weatherInfo.innerHTML = "<p>Kunde inte hämta väder. </p>"
+    }
+}
+
+async function init() {
+    try {
+        const countries = await fetchCountries();
+        fillDropdown(countries);
+    } catch (error) {
+        console.error(error);
     }
 }
 
