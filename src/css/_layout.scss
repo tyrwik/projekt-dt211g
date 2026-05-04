@@ -31,7 +31,6 @@ body {
     background: $content-color;
     padding: 1.15em;
     border-radius: 14px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
 }
     
 
@@ -41,6 +40,12 @@ body {
     align-items: center;
     gap: 1em;
 }
+
+.blue {
+    color: $primary-blue;
+}
+
+
 
 
 

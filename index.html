@@ -12,27 +12,45 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
      crossorigin=""/>
-
   </head>
 
   <body>
-    <header class="header">
-      <div class="logo">  <img src="/logo.png" alt="Logga"> landkollen </div>
-      <div class="intro">
-        <h1>Upptäck länder i världen</h1>
-        <p>
-          Välj ett land för att se informatiom om landet, aktuellt väder och plats på karta.
-        </p>
-      </div>
+    <header>
+      <nav class="navbar">
+        <div class="logo">
+          <img src="/logo.svg" alt="Logga">
+          <span>landkollen</span>
+        </div>
+
+        <ul class="nav-links">
+          <li><a href="#">Hem</a></li>
+          <li><a href="#">Om landkollen</a></li>
+        </ul>
+      </nav>
+
+      <section class="hero">
+        <div class="hero-text">
+          <h1>Upptäck världen med <span class="blue">Landkollen</span></h1>
+          <p>
+            Landkollen är en webbaplikation som ger dig snabb information om världens länder.
+            Välj ett land i listan och utforska fakta om väder, befolkning, språk och region.
+          </p>
+
+          <section class="search-section">
+            <label for="countrySelect">Välj ett land</label>
+            <select id="countrySelect">
+              <option value="">Välj ett land...</option>
+            </select>
+          </section>
+        </div>
+
+        <div class="hero-image">
+          <img src="/earth.png" alt="Bild på jorden">
+        </div>
+      </section>
     </header>
 
     <main class="container">
-      <section class="search-section">
-        <label for="countrySelect">Välj land</label>
-        <select id="countrySelect">
-          <option value="">Välj ett land</option>
-        </select>
-      </section>
 
       <section id="content" class="content-hidden">
         <div class="top-grid">
