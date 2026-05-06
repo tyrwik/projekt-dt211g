@@ -1,50 +1,5 @@
 @use "variables" as *;
 
-body {
-    margin: 0;
-    font-family: "Aleo", serif;
-    background: $bg-color;
-}
-
-.content {
-    background: $content-color;
-    padding: 1.5em;
-    border-radius: 16px;
-}
-
-
-.top-grid, .bottom-grid {
-    display: grid;
-    gap: 1.5em;
-    margin-bottom: 1.5em;
-}
-
-.top-grid {
-    grid-template-columns: 1fr 1fr;
-}
-
-.bottom-grid {
-    grid-template-columns: 1.2fr 1fr;
-}
-
-.box {
-    background: $content-color;
-    padding: 1.15em;
-    border-radius: 14px;
-}
-    
-
-.country-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1em;
-}
-
-.blue {
-    color: $primary-blue;
-}
-
 
 
 
